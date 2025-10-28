@@ -1,0 +1,199 @@
+<div class="page-root">
+  <header class="app-header">
+    <div class="app-title">InBody QR Generator</div>
+  </header>
+  <div class="container" style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+  <div style="flex:1; min-width:300px;">
+    <mat-card *ngIf="form">
+      <mat-card-title>InBody URL Generator</mat-card-title>
+      <mat-card-content [formGroup]="form">
+        <mat-form-field appearance="fill" style="width:100%">
+          <mat-label>INBODY_USER_ID</mat-label>
+          <input matInput formControlName="user_id" />
+          <mat-error *ngIf="form.get('user_id')?.hasError('required')">User ID is required</mat-error>
+        </mat-form-field>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+          <mat-form-field appearance="fill" style="width:160px">
+            <mat-label>Height</mat-label>
+            <input matInput formControlName="height" type="number" step="0.1" />
+            <span matSuffix>cm</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width:120px">
+            <mat-label>Age</mat-label>
+            <input matInput formControlName="age" type="number" step="1" />
+            <span matSuffix>yrs</span>
+          </mat-form-field>
+        </div>
+
+        <mat-accordion multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Timestamp</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div [formGroupName]="'time_stamp'" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <mat-form-field appearance="fill"><mat-label>Year</mat-label><input matInput formControlName="year" type="number" step="1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Month</mat-label><input matInput formControlName="month" type="number" step="1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Date</mat-label><input matInput formControlName="date" type="number" step="1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Hour</mat-label><input matInput formControlName="hour" type="number" step="1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Minutes</mat-label><input matInput formControlName="minutes" type="number" step="1" /></mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Body Composition</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;" formGroupName="body_composition_analysis">
+              <mat-form-field appearance="fill"><mat-label>Total Body Water</mat-label><input matInput formControlName="total_body_water" type="number" step="0.1" /><span matSuffix>L</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Protein</mat-label><input matInput formControlName="protein" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Mineral</mat-label><input matInput formControlName="mineral" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Fat Free Mass</mat-label><input matInput formControlName="fat_free_mass" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+              <mat-form-field appearance="fill"><mat-label>Weight</mat-label><input matInput formControlName="weight" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Skeletal Muscle Mass</mat-label><input matInput formControlName="skeletal_muscle_mass" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Body Fat Mass</mat-label><input matInput formControlName="body_fat_mass" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>BMI</mat-label><input matInput formControlName="BMI" type="number" step="0.1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>% Body Fat</mat-label><input matInput formControlName="percent_body_fat" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Score</mat-label><input matInput formControlName="score" type="number" step="0.1" /></mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Segmental Lean Analysis</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div formGroupName="segmental_lean_analysis" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <mat-form-field appearance="fill"><mat-label>Trunk</mat-label><input matInput formControlName="trunk" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Left Arm</mat-label><input matInput formControlName="left_arm" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Right Arm</mat-label><input matInput formControlName="right_arm" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Left Leg</mat-label><input matInput formControlName="left_leg" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Right Leg</mat-label><input matInput formControlName="right_leg" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Segmental Fat Analysis</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div formGroupName="segmental_fat_analysis" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <mat-form-field appearance="fill"><mat-label>Trunk</mat-label><input matInput formControlName="trunk" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Left Arm</mat-label><input matInput formControlName="left_arm" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Right Arm</mat-label><input matInput formControlName="right_arm" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Left Leg</mat-label><input matInput formControlName="left_leg" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Right Leg</mat-label><input matInput formControlName="right_leg" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Segmental Percentages</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <div formGroupName="segmental_lean_percentage">
+                <mat-form-field appearance="fill"><mat-label>Right Arm Lean %</mat-label><input matInput formControlName="right_arm" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Left Arm Lean %</mat-label><input matInput formControlName="left_arm" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Trunk Lean %</mat-label><input matInput formControlName="trunk" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Right Leg Lean %</mat-label><input matInput formControlName="right_leg" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Left Leg Lean %</mat-label><input matInput formControlName="left_leg" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+              </div>
+              <div formGroupName="segmental_fat_percentage">
+                <mat-form-field appearance="fill"><mat-label>Right Arm Fat %</mat-label><input matInput formControlName="right_arm" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Left Arm Fat %</mat-label><input matInput formControlName="left_arm" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Trunk Fat %</mat-label><input matInput formControlName="trunk" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Right Leg Fat %</mat-label><input matInput formControlName="right_leg" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+                <mat-form-field appearance="fill"><mat-label>Left Leg Fat %</mat-label><input matInput formControlName="left_leg" type="number" step="0.1" /><span matSuffix>%</span></mat-form-field>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Controls & Misc</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <mat-form-field appearance="fill"><mat-label>Waist Hip Ratio</mat-label><input matInput formControlName="waist_hip_ratio" type="number" step="0.01" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Target Weight</mat-label><input matInput formControlName="target_weight" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Weight Control</mat-label><input matInput formControlName="weight_control" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Fat Control</mat-label><input matInput formControlName="fat_control" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Muscle Control</mat-label><input matInput formControlName="muscle_control" type="number" step="0.1" /><span matSuffix>kg</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>BMR</mat-label><input matInput formControlName="BMR" type="number" step="1" /><span matSuffix>kcal</span></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>SMI</mat-label><input matInput formControlName="SMI" type="number" step="0.1" /></mat-form-field>
+              <mat-form-field appearance="fill"><mat-label>Visceral Fat Level</mat-label><input matInput formControlName="visceral_fat_level" type="number" step="1" /></mat-form-field>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <!-- left generate removed; generation is performed from the right QR pane -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="middle-column">
+    <mat-card>
+      <mat-card-title>Upload Report</mat-card-title>
+      <mat-card-content>
+        <!-- Always show the public sample image as the prominent preview -->
+        <div style="text-align:center; margin-bottom:12px;">
+          <img [src]="samplePublicPath" alt="sample report" style="max-width:100%; height:auto; border:1px solid #eee;" />
+        </div>
+
+        <div class="upload-dropzone" (drop)="onDrop($event)" (dragover)="$event.preventDefault()" (dragleave)="$event.preventDefault()">
+          <div *ngIf="!uploadedFile">
+            <p>Drop InBody scanner report here, or</p>
+            <label class="upload-label">
+              <input type="file" accept="image/*,application/pdf" (change)="onFileSelected($event)" hidden />
+              <button mat-raised-button color="primary">Choose File</button>
+            </label>
+          </div>
+          <div *ngIf="uploadedFile" class="upload-preview">
+            <div *ngIf="previewUrl; else fileInfo">
+              <!-- Show PDF preview if it's a PDF -->
+              <ng-container *ngIf="uploadedFile?.type === 'application/pdf'; else imgPreview">
+                <object [data]="previewUrl" type="application/pdf" width="100%" height="400">PDF preview not available</object>
+              </ng-container>
+              <ng-template #imgPreview>
+                <img [src]="previewUrl" alt="preview" style="max-width:100%; max-height:640px; display:block; margin:0 auto;" />
+              </ng-template>
+            </div>
+            <ng-template #fileInfo>
+              <div style="padding:8px 0;">{{ uploadedFile.name }}</div>
+            </ng-template>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+              <button mat-stroked-button (click)="clearUpload()">Remove</button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div style="width:360px; min-width:260px;">
+    <mat-card>
+      <mat-card-title>
+        <div style="display:flex; justify-content:center; align-items:center; padding-top:8px;">
+            <button mat-fab extended (click)="generate()">
+        Generate QR
+      </button>
+        </div>
+      </mat-card-title>
+      <mat-card-content>
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+          <h3 style="margin:0; padding-top:6px;">QR Code</h3>
+          <div *ngIf="generatedUrl; else emptyPreview" class="qr-preview">
+            <img [src]="qrPreviewSrc(generatedUrl)" alt="QR preview" style="max-width:100%; max-height:100%;" />
+          </div>
+          <ng-template #emptyPreview>
+            <div style="width:220px; height:220px; display:flex; align-items:center; justify-content:center; background:#fff;color:#777;border:1px dashed #ddd;">No QR</div>
+          </ng-template>
+
+          <div style="display:flex; gap:8px;">
+            <button mat-icon-button aria-label="Copy URL" (click)="copyToClipboard()"><mat-icon>content_copy</mat-icon></button>
+            <a *ngIf="generatedUrl" [href]="generatedUrl" target="_blank" rel="noopener" style="text-decoration:none"><button mat-icon-button aria-label="Open URL"><mat-icon>open_in_new</mat-icon></button></a>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

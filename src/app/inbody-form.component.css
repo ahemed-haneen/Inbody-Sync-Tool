@@ -1,0 +1,108 @@
+.container {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 16px;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-height: 100vh;
+	background: #fafafa;
+	overflow-x: hidden; /* prevent horizontal overflow */
+}
+
+.page-root { font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial; background: #fbfbfc; min-height:100vh; }
+.app-header { padding:20px 24px; display:flex; align-items:baseline; gap:12px; border-bottom:1px solid #eee; background:linear-gradient(90deg, rgba(230,0,38,0.03), transparent); }
+.app-title { font-size:28px; font-weight:700; color:var(--inbody-red); }
+.app-sub { font-size:13px; color:rgba(0,0,0,0.5); margin-top:6px }
+
+/* primary actions use InBody red */
+button[mat-raised-button][color='primary'] { background: var(--inbody-red); color: white; }
+button[mat-raised-button][color='primary']:hover { background: var(--inbody-dark); }
+button[mat-stroked-button] { border-color: rgba(0,0,0,0.08); }
+mat-card { background: var(--surface); }
+
+/* small responsive tweaks */
+@media (max-width: 900px) {
+	.container { flex-direction:column; }
+	.container > .middle-column, .container > div:last-child { flex: 1 1 auto; max-width:100%; }
+	.app-title { font-size:22px; }
+}
+
+/* left column stretches, right column fixed width in template */
+.container > div:first-child {
+	/* make the left form column narrower so the middle pane can be larger */
+	flex: 1 1 320px;
+	min-width: 280px; /* allow some shrink but keep form usable */
+}
+
+.container > .middle-column {
+	/* make the middle pane larger and more prominent */
+	flex: 0 0 560px;
+	min-width: 640px;
+}
+
+.middle-column mat-card {
+	box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+	border: 1px solid rgba(0,0,0,0.06);
+	background: linear-gradient(180deg, #fff, #fbfbfc);
+}
+
+.container > div:last-child {
+	flex: 0 0 300px;
+	max-width: 800px;
+	min-width: 260px;
+}
+
+/* make form fields and textarea wrap safely */
+mat-form-field, textarea, input {
+	min-width: 0;
+}
+
+textarea[readonly] {
+	white-space: pre-wrap;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+.qr-preview {
+	width: 220px;
+	height: 220px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	border: 1px solid #eee;
+}
+
+.qr-controls {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.upload-dropzone {
+	border: 1px dashed #ccc;
+	padding: 12px;
+	min-height: 120px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	text-align:center;
+	background: #fff;
+}
+
+.upload-preview img { max-width:100%; max-height:640px; display:block }
+
+label { display:block; margin-top:8px; font-weight:600 }
+input { width:100%; padding:8px; border:1px solid #ddd; border-radius:4px }
+button { padding:8px 12px; background:var(--inbody-red); color:white; border:none; border-radius:4px; }
+button:hover { background:var(--inbody-dark); }
+
+/* icon buttons use accent color */
+button.mat-icon-button mat-icon, button.mat-icon-button { color: var(--inbody-red); }
+
+/* make right card stick while left scrolls if content tall */
+mat-card { box-sizing: border-box; }
+.container { overflow: auto; }
+.container > div:last-child mat-card { position: sticky; top: 16px; }

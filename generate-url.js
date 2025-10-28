@@ -1,5 +1,17 @@
+require('node:process');
+
+// Try to load local .env if the user has dotenv installed and a .env file
+try {
+  // eslint-disable-next-line global-require
+  require('dotenv').config();
+} catch (e) {
+  // dotenv is optional; ignore if not installed
+}
+
+const USER_ID_ENV = process.env.INBODY_USER_ID; // the value can be found in repo secrets
+
 let url_data_mapper = {
-  user_id: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx",
+  user_id: USER_ID_ENV || "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx",
   height: "1740",
   age: "26",
   time_stamp: {

@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+/* global theme variables (available to all components) */
+:root {
+	--inbody-red: #c8102e;
+	--inbody-dark: #9b0f20;
+	--surface: #ffffff;
+	--muted: #6b6b6b;
+}
+
+/* prefer Roboto (included in index.html), fall back to Inter then system fonts */
+body {
+	font-family: 'Roboto', 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial;
+	margin: 0;
+	height: 100%;
+}
+
+app-root { display: block; padding: 16px; }
+.container { max-width: 1100px; margin: 0 auto; }
